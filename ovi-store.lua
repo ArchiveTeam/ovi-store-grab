@@ -31,7 +31,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   end
   
   if item_type == "app" and (downloaded[url] ~= true and addedtolist[url] ~= true) then
-    if string.match(url, "[^0-9]"..item_value.."[0-9][^0-9]") then
+    if string.match(url, "[^0-9]"..item_value.."[0-9][^0-9]") and not string.match(url, "https?://store%.ovi%.com/content/"..item_value.."[0-9]/applications%?categoryId=[0-9]+") then
       return verdict
     elseif html == 0 then
       return verdict
@@ -48,7 +48,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local html = nil
   
   local function check(url)
-    if downloaded[url] ~= true and addedtolist[url] ~= true then
+    if (downloaded[url] ~= true and addedtolist[url] ~= true) and not string.match(url, "https?://store%.ovi%.com/content/"..item_value.."[0-9]/applications%?categoryId=[0-9]+") then
       table.insert(urls, { url=url })
       addedtolist[url] = true
     end
@@ -100,11 +100,11 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     io.stdout:write("\nServer returned "..http_stat.statcode..". Sleeping.\n")
     io.stdout:flush()
 
-    os.execute("sleep 10")
+    os.execute("sleep 3")
 
     tries = tries + 1
 
-    if tries >= 5 then
+    if tries >= 2 then
       io.stdout:write("\nI give up...\n")
       io.stdout:flush()
       return wget.actions.EXIT
