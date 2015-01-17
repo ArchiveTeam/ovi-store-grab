@@ -58,7 +58,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     if string.match(url, "https?://store%.ovi%.com/content/[0-9]+/Download") then
       html = read_file(file)
       for newurl in string.gmatch(html, "(https?://[^\n]+)") do
-        if string.match(newurl, "https?://[a-z]%.ovi%.com/[a-z]/[a-z]/store/") then
+        if string.match(newurl, "https?://[a-z]%.ovi%.com/[a-z]/[a-z]/store/") or string.match(newurl, " https?://wam%.browser%.ovi%.com/[^/]+/v1_0/clients/") then
           check(newurl)
         end
       end
