@@ -109,8 +109,12 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   end
   
   if string.match(url["url"], "https?://store%.ovi%.com/content/"..item_value.."[0-9]/Download%?terminalId=") and downloadsize[http_stat["orig_file_size"]] == true then
+    io.stdout:write("\nOld.\n")
+    io.stdout:flush()
     return wget.actions.EXIT
   elseif string.match(url["url"], "https?://store%.ovi%.com/content/"..item_value.."[0-9]/Download%?terminalId=") and downloadsize[http_stat["orig_file_size"]] == false then
+    io.stdout:write("\nNew.\n")
+    io.stdout:flush()
     downloadsize[http_stat["orig_file_size"]] = true
     return wget.actions.NOTHING
   elseif string.match(url["url"], "https?://store%.ovi%.com/content/[0-9]+/Download") and status_code == 500 then
