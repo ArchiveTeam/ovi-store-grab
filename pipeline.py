@@ -198,9 +198,9 @@ class WgetArgs(object):
         
         if item_type == 'app':
             suffixes = string.digits + string.lowercase
-            for url in ['http://twitpic.com/{0}{1}'.format(item_value, s) for s in suffixes]:
+            for url in ['http://store.ovi.com/content/{0}{1}'.format(item_value, s) for s in suffixes]:
                 wget_args.append(url)
-            for url in ['http://twitpic.com/{0}{1}/Download'.format(item_value, s) for s in suffixes]:
+            for url in ['http://store.ovi.com/content/{0}{1}/Download'.format(item_value, s) for s in suffixes]:
                 wget_args.append(url)
         else:
             raise Exception('Unknown item')
