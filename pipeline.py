@@ -197,7 +197,7 @@ class WgetArgs(object):
         assert item_type in ('app')
         
         if item_type == 'app':
-            suffixes = string.digits + string.lowercase
+            suffixes = string.digits
             for url in ['http://store.ovi.com/content/{0}{1}'.format(item_value, s) for s in suffixes]:
                 wget_args.append(url)
             for url in ['http://store.ovi.com/content/{0}{1}/Download'.format(item_value, s) for s in suffixes]:
