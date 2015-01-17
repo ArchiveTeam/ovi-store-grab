@@ -71,7 +71,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end 
       end
     end
-    if string.match(url, "d%.ovi%.com/[a-z]/[a-z]/store/[0-9]+/[^%?]+%?") then
+    if string.match(url, "[0-9]%.[0-9]%.ovi%.com/[a-z]/[a-z]/store/[0-9]+/[^%?]+%?") then
       local newurl = string.match(url, "(https?://[^/]+/[a-z]/[a-z]/store/[0-9]+/[^%?]+)%?")
       check(newurl)
     end
