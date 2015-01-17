@@ -102,6 +102,22 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   
   if string.match(url["url"], "https?://[a-z]%.[a-z]%.ovi%.com/") and status_code == 400 then
     return wget.actions.EXIT
+  elseif string.match(url["url"], "https?://[a-z]%.ovi%.com/") and status_code == 400 then
+    (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then
+    io.stdout:write("\nServer returned "..http_stat.statcode..". Sleeping.\n")
+    io.stdout:flush()
+
+    os.execute("sleep 10")
+
+    tries = tries + 1
+
+    if tries >= 5 then
+      io.stdout:write("\nI give up...\n")
+      io.stdout:flush()
+      return wget.actions.EXIT
+    else
+      return wget.actions.CONTINUE
+    end
   elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then
     io.stdout:write("\nServer returned "..http_stat.statcode..". Sleeping.\n")
