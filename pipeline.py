@@ -24,8 +24,8 @@ from seesaw.util import find_executable
 
 
 # check the seesaw version
-if StrictVersion(seesaw.__version__) < StrictVersion("0.1.5"):
-    raise Exception("This pipeline needs seesaw version 0.1.5 or higher.")
+if StrictVersion(seesaw.__version__) < StrictVersion("0.8.5"):
+    raise Exception("This pipeline needs seesaw version 0.8.5 or higher.")
 
 
 ###########################################################################
@@ -57,7 +57,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20150116.01"
+VERSION = "20150203.01"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'ovi-store'
 TRACKER_HOST = 'tracker.archiveteam.org'
