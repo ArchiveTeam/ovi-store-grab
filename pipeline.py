@@ -57,8 +57,12 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20150203.01"
-USER_AGENT = 'ArchiveTeam'
+VERSION = "20150701.01"
+USER_AGENT = ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) '
+              'AppleWebKit/600.2.5 (KHTML, like Gecko) Version/8.0.2 '
+              'Safari/600.2.5 Arch1veTeam (compatible; we\'re sorry; '
+              'archive team . org)')
+
 TRACKER_ID = 'ovi-store'
 TRACKER_HOST = 'tracker.archiveteam.org'
 
