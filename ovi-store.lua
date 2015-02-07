@@ -96,7 +96,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   io.stdout:write(url_count .. "=" .. status_code .. " " .. url["url"] .. ".  \n")
   io.stdout:flush()
   
-  if (status_code >= 200 and status_code <= 399) or status_code == 403 then
+  if (status_code >= 200 and status_code <= 399) then
     if string.match(url["url"], "https://") then
       local newurl = string.gsub(url["url"], "https://", "http://")
       downloaded[newurl] = true
@@ -105,8 +105,11 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     end
   end
   
+  -- if 500, app is not available in country
   if string.match(url["url"], "https?://store%.ovi%.com/content/[0-9]+/Download") and status_code == 500 then
-    return wget.actions.ABORT
+    -- comment out abort. grab what we can first, then try to get it later
+    -- return wget.actions.ABORT
+    return wget.actions.EXIT
   elseif string.match(url["url"], "https?://[a-z]%.[a-z]%.ovi%.com/") and status_code == 400 then
     return wget.actions.EXIT
   elseif string.match(url["url"], "https?://[a-z]%.ovi%.com/") and status_code == 400 then
@@ -125,11 +128,11 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
       return wget.actions.CONTINUE
     end
   elseif status_code >= 500 or
-    (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then
+    (status_code >= 400 and status_code ~= 404) then
     io.stdout:write("\nServer returned "..http_stat.statcode..". Sleeping.\n")
     io.stdout:flush()
 
-    os.execute("sleep 1")
+    os.execute("sleep 5")
 
     tries = tries + 1
 
