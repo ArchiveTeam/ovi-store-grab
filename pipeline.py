@@ -235,8 +235,24 @@ project = Project(
         <img class="project-logo" alt="Project logo" src="http://archiveteam.org/images/7/7d/Ovi-store-icon.png" height="50px" title=""/>
         <h2>ovi.store.com <span class="links"><a href="http://store.ovi.com/">Website</a> &middot; <a href="http://tracker.archiveteam.org/ovi-store/">Leaderboard</a></span></h2>
         <p>Grabbing everything from store.ovi.com.</p>
+        <p class="projectBroadcastMessage">
+            If you see something stuck in a loop, making too many requests,
+            taking too long to finish, or other issue, please let us know
+            <a href="http://archiveteam.org/index.php?title=IRC"> on IRC</a>
+            or <a href="https://github.com/ArchiveTeam/ovi-store-grab/issues"> issue tracker</a>.
+        </p>
     """
 )
+
+print("""
+
+# NOTICE #####
+If you see something stuck in a loop, making too many requests,
+taking too long to finish, or other issue, please let us know
+http://archiveteam.org/index.php?title=IRC on IRC
+or https://github.com/ArchiveTeam/ovi-store-grab/issues issue tracker.
+""")
+time.sleep(2)
 
 pipeline = Pipeline(
     CheckIP(),
