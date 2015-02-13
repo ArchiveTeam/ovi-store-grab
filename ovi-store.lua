@@ -34,6 +34,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     if string.match(url, "[^0-9]"..item_value.."[0-9][^0-9]") 
     and not string.match(url, "https?://store%.ovi%.com/content/"..item_value.."[0-9]/.*applications%?categoryId=[0-9]+") 
     and not string.match(url, "https?://store%.ovi%.com/content/"..item_value.."[0-9]/channel/channel/")
+    and not string.match(url, "https?://store%.ovi%.com/content/.*clickSource=related")
     then
       return verdict
     elseif html == 0 then
@@ -53,7 +54,9 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local function check(url)
     if (downloaded[url] ~= true and addedtolist[url] ~= true) 
     and not string.match(url, "https?://store%.ovi%.com/content/"..item_value.."[0-9]/.*applications%?categoryId=[0-9]+") 
-    and not string.match(url, "https?://store%.ovi%.com/content/"..item_value.."[0-9]/channel/channel/") then
+    and not string.match(url, "https?://store%.ovi%.com/content/"..item_value.."[0-9]/channel/channel/")
+    and not string.match(url, "https?://store%.ovi%.com/content/.*clickSource=related")
+    then
       table.insert(urls, { url=url })
       addedtolist[url] = true
     end
