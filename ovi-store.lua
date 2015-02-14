@@ -98,7 +98,15 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   url_count = url_count + 1
   io.stdout:write(url_count .. "=" .. status_code .. " " .. url["url"] .. ".  \n")
   io.stdout:flush()
-  
+
+  if url_count > 1000 then
+    io.stdout:write("This job appears to be stuck. Please report this job ID.  \n")
+    io.stdout:write("Waiting 60 seconds and then abort.  \n")
+    io.stdout:flush()
+    os.execute("sleep 60")
+    return wget.actions.ABORT
+  end
+
   if (status_code >= 200 and status_code <= 399) then
     if string.match(url["url"], "https://") then
       local newurl = string.gsub(url["url"], "https://", "http://")
