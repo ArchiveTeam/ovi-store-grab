@@ -123,7 +123,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     return wget.actions.EXIT
   elseif string.match(url["url"], "https?://[a-z]%.[a-z]%.ovi%.com/") and status_code == 400 then
     return wget.actions.EXIT
-  elseif string.match(url["url"], "https?://[a-z]%.ovi%.com/") and status_code == 400 then
+  elseif (string.match(url["url"], "https?://[a-z]%.ovi%.com/") or string.match(url["url"], "https?://qa%.p%.d.ovi%.com/")) and status_code == 400 then
     io.stdout:write("\nServer returned "..http_stat.statcode..". Sleeping.\n")
     io.stdout:flush()
 
