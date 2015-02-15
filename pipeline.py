@@ -57,7 +57,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "30150215.01"  # i made a typo, so year 3000 it is
+VERSION = "30150215.02"  # i made a typo, so year 3000 it is
 
 USER_AGENTS = [
     'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)',
@@ -207,7 +207,10 @@ class WgetArgs(object):
         assert item_type in ('app')
         
         if item_type == 'app':
-            suffixes = string.digits
+            if item_value == '':
+                suffixes = '123456789'
+            else:
+                suffixes = string.digits
             for url in ['http://store.ovi.com/content/{0}{1}'.format(item_value, s) for s in suffixes]:
                 wget_args.append(url)
             for url in ['http://store.ovi.com/content/{0}{1}/Download'.format(item_value, s) for s in suffixes]:
